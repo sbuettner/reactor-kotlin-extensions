@@ -1,10 +1,12 @@
 import reactor.core.publisher.Flux
+import java.util.stream.Stream
 
 fun <T> Iterator<T>.toFlux() : Flux<T> = toIterable().toFlux()
 fun <T> Iterable<T>.toFlux() : Flux<T> = Flux.fromIterable(this)
 fun <T> Sequence<T>.toFlux() : Flux<T> = Flux.fromIterable(object : Iterable<T> {
     override fun iterator(): Iterator<T> = this@toFlux.iterator()
 })
+fun <T> Stream<T>.toFlux() : Flux<T> = Flux.fromStream(this)
 
 fun BooleanArray.toFlux() : Flux<Boolean> = this.toList().toFlux()
 fun ByteArray.toFlux() : Flux<Byte> = this.toList().toFlux()
