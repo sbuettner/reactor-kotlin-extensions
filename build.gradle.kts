@@ -15,7 +15,7 @@ apply {
 	plugin("kotlin")
 }
 
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0.BUILD-SNAPSHOT"
 
 repositories {
 	mavenCentral()
