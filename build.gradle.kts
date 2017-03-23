@@ -23,7 +23,7 @@ repositories {
 }
 
 val kotlinVersion = extra["kotlinVersion"] as String
-val reactorCoreVersion = "3.0.4.RELEASE"
+val reactorCoreVersion = "3.0.5.RELEASE"
 
 dependencies {
 	compile("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
