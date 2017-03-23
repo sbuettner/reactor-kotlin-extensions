@@ -3,7 +3,6 @@ package reactor.core.publisher
 import org.junit.Test
 import reactor.test.StepVerifier
 import reactor.test.expectError
-import toMono
 import java.util.concurrent.Callable
 import java.util.concurrent.CompletableFuture
 

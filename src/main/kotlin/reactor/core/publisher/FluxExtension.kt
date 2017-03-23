@@ -1,4 +1,5 @@
-import reactor.core.publisher.Flux
+package reactor.core.publisher
+
 import java.util.stream.Stream
 
 fun <T> Iterator<T>.toFlux() : Flux<T> = toIterable().toFlux()

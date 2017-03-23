@@ -1,4 +1,5 @@
-import reactor.core.publisher.Mono
+package reactor.core.publisher
+
 import java.util.concurrent.Callable
 import java.util.concurrent.CompletableFuture
 

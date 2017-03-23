@@ -3,7 +3,6 @@ package reactor.core.publisher
 import org.junit.Test
 import reactor.test.StepVerifier
 import reactor.test.expectError
-import toFlux
 
 class FluxTests {
 
