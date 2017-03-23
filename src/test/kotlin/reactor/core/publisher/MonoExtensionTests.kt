@@ -6,7 +6,7 @@ import reactor.test.expectError
 import java.util.concurrent.Callable
 import java.util.concurrent.CompletableFuture
 
-class MonoTests {
+class MonoExtensionTests {
 
     @Test
     fun anyToMono() {

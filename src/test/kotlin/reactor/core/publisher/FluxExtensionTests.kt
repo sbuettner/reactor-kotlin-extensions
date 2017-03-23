@@ -2,16 +2,15 @@ package reactor.core.publisher
 
 import org.junit.Test
 import reactor.test.StepVerifier
-import reactor.test.expectError
 
-class FluxTests {
+class FluxExtensionTests {
 
     @Test
     fun throwableToFlux() {
         var ex = IllegalStateException()
-        val mono: Flux<Any> = ex.toFlux()
-        StepVerifier.create(mono)
-                .expectError(IllegalStateException::class)
+        val flux: Flux<Any> = ex.toFlux()
+        StepVerifier.create(flux)
+                .expectError(IllegalStateException::class.java)
                 .verify()
     }
 
