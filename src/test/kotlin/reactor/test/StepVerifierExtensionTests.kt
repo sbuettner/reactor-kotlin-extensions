@@ -2,21 +2,25 @@ package reactor.test
 
 import org.junit.Test
 import reactor.core.publisher.Mono
+import reactor.core.publisher.test
+import reactor.core.publisher.toMono
 
 class StepVerifierExtensionTests {
 
     @Test
     fun expectError() {
-        val mono = Mono.error<Void>(IllegalStateException())
-        StepVerifier.create(mono)
+        IllegalStateException()
+                .toMono<Void>()
+                .test()
                 .expectError(IllegalStateException::class)
                 .verify()
     }
 
     @Test
     fun verifyError() {
-        val mono = Mono.error<Void>(IllegalStateException())
-        StepVerifier.create(mono)
+        IllegalStateException()
+                .toMono<Void>()
+                .test()
                 .verifyError(IllegalStateException::class)
     }
 

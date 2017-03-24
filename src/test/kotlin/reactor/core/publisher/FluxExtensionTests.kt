@@ -1,17 +1,22 @@
 package reactor.core.publisher
 
 import org.junit.Test
-import reactor.test.StepVerifier
+import reactor.test.verifyError
 
 class FluxExtensionTests {
 
     @Test
-    fun throwableToFlux() {
-        var ex = IllegalStateException()
-        val flux: Flux<Any> = ex.toFlux()
-        StepVerifier.create(flux)
-                .expectError(IllegalStateException::class.java)
-                .verify()
+    fun `Throwable to Flux`() {
+        IllegalStateException()
+                .toFlux<Any>()
+                .test()
+                .verifyError(IllegalStateException::class)
+    }
+
+    @Test
+    fun cast() {
+        val fluxOfAny: Flux<Any> = Flux.just("foo")
+        fluxOfAny.cast<String>().test().expectNext("foo").verifyComplete()
     }
 
 }

@@ -1,6 +1,9 @@
 package reactor.core.publisher
 
+import reactor.test.StepVerifier
 import java.util.stream.Stream
+import kotlin.reflect.KClass
+
 
 fun <T> Iterator<T>.toFlux(): Flux<T> = toIterable().toFlux()
 fun <T> Iterable<T>.toFlux(): Flux<T> = Flux.fromIterable(this)
@@ -25,4 +28,8 @@ private fun <T> Iterator<T>.toIterable() = object : Iterable<T> {
 
 fun <T> Throwable.toFlux(): Flux<T> = Flux.error(this)
 
-inline fun <reified R : Any> Flux<*>.cast(): Flux<R> = cast(R::class.java)
+fun Flux<*>.test() = StepVerifier.create(this)
+fun Flux<*>.test(n: Long) = StepVerifier.create(this, n)
+
+inline fun <reified T : Any> Flux<*>.cast(): Flux<T> = cast(T::class.java)
+
