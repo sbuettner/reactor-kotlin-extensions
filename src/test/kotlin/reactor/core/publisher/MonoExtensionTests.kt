@@ -1,5 +1,6 @@
 package reactor.core.publisher
 
+import org.junit.Assert
 import org.junit.Test
 import reactor.test.expectError
 import java.util.concurrent.Callable
@@ -40,6 +41,16 @@ class MonoExtensionTests {
                 .test()
                 .expectError(IllegalStateException::class)
                 .verify()
+    }
+
+    @Test
+    fun doOnError() {
+        val monoOnError: Mono<Any> = IllegalStateException().toMono()
+        var invoked = false
+        monoOnError.doOnError(IllegalStateException::class, {
+            invoked = true
+        }).subscribe()
+        Assert.assertTrue(invoked)
     }
 
 }

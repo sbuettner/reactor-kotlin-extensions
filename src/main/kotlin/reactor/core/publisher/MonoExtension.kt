@@ -3,6 +3,7 @@ package reactor.core.publisher
 import reactor.test.StepVerifier
 import java.util.concurrent.Callable
 import java.util.concurrent.CompletableFuture
+import kotlin.reflect.KClass
 
 fun <T> T.toMono(): Mono<T> = Mono.just(this)
 fun <T> CompletableFuture<T>.toMono(): Mono<T> = Mono.fromFuture(this)
@@ -13,3 +14,6 @@ fun Mono<*>.test() = StepVerifier.create(this)
 fun Mono<*>.test(n: Long) = StepVerifier.create(this, n)
 
 inline fun <reified T : Any> Mono<*>.cast(): Mono<T> = cast(T::class.java)
+
+fun <T, E : Throwable> Mono<T>.doOnError(exceptionType: KClass<E>, onError: (E) -> Unit) : Mono<T> =
+        doOnError(exceptionType.java, { onError(it) })
