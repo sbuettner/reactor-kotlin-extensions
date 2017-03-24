@@ -59,4 +59,14 @@ class FluxExtensionTests {
                 .verifyError<IllegalStateException>()
     }
 
+    @Test
+    fun `ofType() with KClass parameter`() {
+        arrayOf("foo", 1).toFlux().ofType(String::class).test().expectNext("foo").verifyComplete()
+    }
+
+    @Test
+    fun `ofType() with generic parameter`() {
+        arrayOf("foo", 1).toFlux().ofType<String>().test().expectNext("foo").verifyComplete()
+    }
+
 }

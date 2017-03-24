@@ -43,3 +43,5 @@ fun <E : Throwable> Flux<*>.mapError(exceptionType: KClass<E>, onError: (E) -> T
 inline fun <reified E : Throwable> Flux<*>.mapError(crossinline onError: (E) -> Throwable) : Flux<*> =
         mapError(E::class.java, { onError(it) })
 
+fun <T : Any> Flux<*>.ofType(kClass: KClass<T>) : Flux<*> = ofType(kClass.java)
+inline fun <reified T : Any> Flux<*>.ofType() : Flux<*> = ofType(T::class.java)
