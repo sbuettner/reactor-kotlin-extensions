@@ -37,14 +37,14 @@ inline fun <reified T : Any> Flux<*>.cast(): Flux<T> = cast(T::class.java)
 fun <T, E : Throwable> Flux<T>.doOnError(exceptionType: KClass<E>, onError: (E) -> Unit) : Flux<T> =
         doOnError(exceptionType.java, { onError(it) })
 
-fun <T, E : Throwable> Flux<T>.mapError(exceptionType: KClass<E>, onError: (E) -> Throwable) : Flux<T> =
-        mapError(exceptionType.java, { onError(it) })
+fun <T, E : Throwable> Flux<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable) : Flux<T> =
+        mapError(exceptionType.java, { mapper(it) })
 
 fun <T : Any> Flux<*>.ofType(kClass: KClass<T>) : Flux<*> = ofType(kClass.java)
 inline fun <reified T : Any> Flux<*>.ofType() : Flux<*> = ofType(T::class.java)
 
-fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>, onError: (E) -> Publisher<T>) : Flux<T> =
-        onErrorResumeWith(exceptionType.java, { onError(it) })
+fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>, fallback: (E) -> Publisher<T>) : Flux<T> =
+        onErrorResumeWith(exceptionType.java, { fallback(it) })
 
 fun <T : Any, E : Throwable> Flux<T>.onErrorReturn(exceptionType: KClass<E>, value: T) : Flux<T> =
         onErrorReturn(exceptionType.java, value)
