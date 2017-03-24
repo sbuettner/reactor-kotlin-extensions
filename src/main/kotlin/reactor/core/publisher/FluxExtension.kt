@@ -1,5 +1,6 @@
 package reactor.core.publisher
 
+import org.reactivestreams.Publisher
 import reactor.test.StepVerifier
 import java.util.stream.Stream
 import kotlin.reflect.KClass
@@ -45,3 +46,6 @@ inline fun <reified E : Throwable> Flux<*>.mapError(crossinline onError: (E) -> 
 
 fun <T : Any> Flux<*>.ofType(kClass: KClass<T>) : Flux<*> = ofType(kClass.java)
 inline fun <reified T : Any> Flux<*>.ofType() : Flux<*> = ofType(T::class.java)
+
+fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>, onError: (E) -> Publisher<T>) : Flux<T> =
+        onErrorResumeWith(exceptionType.java, { onError(it) })

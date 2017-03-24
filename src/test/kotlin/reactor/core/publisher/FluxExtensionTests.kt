@@ -69,4 +69,14 @@ class FluxExtensionTests {
         arrayOf("foo", 1).toFlux().ofType<String>().test().expectNext("foo").verifyComplete()
     }
 
+    @Test
+    fun `onErrorResumeWith() with KClass parameter`() {
+        IOException()
+                .toFlux<String>()
+                .onErrorResumeWith(IOException::class, { "foo".toMono() })
+                .test()
+                .expectNext("foo")
+                .verifyComplete()
+    }
+
 }
