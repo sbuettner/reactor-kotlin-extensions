@@ -20,3 +20,6 @@ fun <T, E : Throwable> Mono<T>.doOnError(exceptionType: KClass<E>, onError: (E) 
 
 fun <T, E : Throwable> Mono<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable) : Mono<T> =
         mapError(exceptionType.java, { mapper(it) })
+
+fun <T : Any> Mono<*>.ofType(kClass: KClass<T>) : Mono<*> = ofType(kClass.java)
+inline fun <reified T : Any> Mono<*>.ofType() : Mono<*> = ofType(T::class.java)

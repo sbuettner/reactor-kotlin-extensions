@@ -64,6 +64,18 @@ class MonoExtensionTests {
                 .verifyError<IllegalStateException>()
     }
 
+    @Test
+    fun `ofType() with KClass parameter`() {
+        "foo".toMono().ofType(String::class).test().expectNext("foo").verifyComplete()
+        "foo".toMono().ofType(Integer::class).test().verifyComplete()
+    }
+
+    @Test
+    fun `ofType() with generic parameter`() {
+        "foo".toMono().ofType<String>().test().expectNext("foo").verifyComplete()
+        "foo".toMono().ofType<Integer>().test().verifyComplete()
+    }
+
 }
 
 
