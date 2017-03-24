@@ -17,3 +17,6 @@ inline fun <reified T : Any> Mono<*>.cast(): Mono<T> = cast(T::class.java)
 
 fun <T, E : Throwable> Mono<T>.doOnError(exceptionType: KClass<E>, onError: (E) -> Unit) : Mono<T> =
         doOnError(exceptionType.java, { onError(it) })
+
+fun <T, E : Throwable> Mono<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable) : Mono<T> =
+        mapError(exceptionType.java, { mapper(it) })

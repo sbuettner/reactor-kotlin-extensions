@@ -3,6 +3,8 @@ package reactor.core.publisher
 import org.junit.Assert
 import org.junit.Test
 import reactor.test.expectError
+import reactor.test.verifyError
+import java.io.IOException
 import java.util.concurrent.Callable
 import java.util.concurrent.CompletableFuture
 
@@ -51,6 +53,15 @@ class MonoExtensionTests {
             invoked = true
         }).subscribe()
         Assert.assertTrue(invoked)
+    }
+
+    @Test
+    fun mapError() {
+        IOException()
+                .toMono<Any>()
+                .mapError(IOException::class, ::IllegalStateException)
+                .test()
+                .verifyError<IllegalStateException>()
     }
 
 }
