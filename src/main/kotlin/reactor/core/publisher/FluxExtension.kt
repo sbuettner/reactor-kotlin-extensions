@@ -29,8 +29,8 @@ private fun <T> Iterator<T>.toIterable() = object : Iterable<T> {
 
 fun <T> Throwable.toFlux(): Flux<T> = Flux.error(this)
 
-fun Flux<*>.test() = StepVerifier.create(this)
-fun Flux<*>.test(n: Long) = StepVerifier.create(this, n)
+fun <T> Flux<T>.test(): StepVerifier.FirstStep<T> = StepVerifier.create(this)
+fun <T> Flux<T>.test(n: Long): StepVerifier.FirstStep<T> = StepVerifier.create(this, n)
 
 inline fun <reified T : Any> Flux<*>.cast(): Flux<T> = cast(T::class.java)
 
@@ -40,8 +40,8 @@ fun <T, E : Throwable> Flux<T>.doOnError(exceptionType: KClass<E>, onError: (E) 
 fun <T, E : Throwable> Flux<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable) : Flux<T> =
         mapError(exceptionType.java, { mapper(it) })
 
-fun <T : Any> Flux<*>.ofType(kClass: KClass<T>) : Flux<*> = ofType(kClass.java)
-inline fun <reified T : Any> Flux<*>.ofType() : Flux<*> = ofType(T::class.java)
+fun <T : Any> Flux<*>.ofType(kClass: KClass<T>) : Flux<T> = ofType(kClass.java)
+inline fun <reified T : Any> Flux<*>.ofType() : Flux<T> = ofType(T::class.java)
 
 fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>, fallback: (E) -> Publisher<T>) : Flux<T> =
         onErrorResumeWith(exceptionType.java, { fallback(it) })
