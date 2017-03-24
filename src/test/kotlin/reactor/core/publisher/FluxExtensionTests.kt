@@ -3,6 +3,7 @@ package reactor.core.publisher
 import org.junit.Assert
 import org.junit.Test
 import reactor.test.verifyError
+import java.io.IOException
 
 class FluxExtensionTests {
 
@@ -38,6 +39,24 @@ class FluxExtensionTests {
             invoked = true
         }.subscribe()
         Assert.assertTrue(invoked)
+    }
+
+    @Test
+    fun `mapError() with KClass parameter`() {
+        IOException()
+                .toFlux<Any>()
+                .mapError(IOException::class, ::IllegalStateException)
+                .test()
+                .verifyError<IllegalStateException>()
+    }
+
+    @Test
+    fun `mapError() with generic parameter`() {
+        IOException()
+                .toFlux<Any>()
+                .mapError<IOException>(::IllegalStateException)
+                .test()
+                .verifyError<IllegalStateException>()
     }
 
 }

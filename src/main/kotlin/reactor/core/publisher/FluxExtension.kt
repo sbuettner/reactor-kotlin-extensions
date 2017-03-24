@@ -37,3 +37,9 @@ fun <E : Throwable> Flux<*>.doOnError(exceptionType: KClass<E>, onError: (E) -> 
         doOnError(exceptionType.java, { onError(it) })
 inline fun <reified E : Throwable> Flux<*>.doOnError(crossinline onError: (E) -> Unit) : Flux<*> =
         doOnError(E::class.java, { onError(it) })
+
+fun <E : Throwable> Flux<*>.mapError(exceptionType: KClass<E>, onError: (E) -> Throwable) : Flux<*> =
+        mapError(exceptionType.java, { onError(it) })
+inline fun <reified E : Throwable> Flux<*>.mapError(crossinline onError: (E) -> Throwable) : Flux<*> =
+        mapError(E::class.java, { onError(it) })
+
