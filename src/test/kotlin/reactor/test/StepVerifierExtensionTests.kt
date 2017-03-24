@@ -8,7 +8,7 @@ import reactor.core.publisher.toMono
 class StepVerifierExtensionTests {
 
     @Test
-    fun expectError() {
+    fun `expectError() with KClass parameter`() {
         IllegalStateException()
                 .toMono<Void>()
                 .test()
@@ -17,11 +17,28 @@ class StepVerifierExtensionTests {
     }
 
     @Test
-    fun verifyError() {
+    fun `expectError() with generic parameter`() {
+        IllegalStateException()
+                .toMono<Void>()
+                .test()
+                .expectError<IllegalStateException>()
+                .verify()
+    }
+
+    @Test
+    fun `verifyError() with KClass parameter`() {
         IllegalStateException()
                 .toMono<Void>()
                 .test()
                 .verifyError(IllegalStateException::class)
+    }
+
+    @Test
+    fun `verifyError() with generic parameter`() {
+        IllegalStateException()
+                .toMono<Void>()
+                .test()
+                .verifyError<IllegalStateException>()
     }
 
 }
