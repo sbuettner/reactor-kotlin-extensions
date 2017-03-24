@@ -26,3 +26,6 @@ inline fun <reified T : Any> Mono<*>.ofType() : Mono<*> = ofType(T::class.java)
 
 fun <T : Any, E : Throwable> Mono<T>.otherwise(exceptionType: KClass<E>, fallback: (E) -> Mono<T>) : Mono<T> =
         otherwise(exceptionType.java, { fallback(it) })
+
+fun <T : Any, E : Throwable> Mono<T>.otherwiseReturn(exceptionType: KClass<E>, value: T) : Mono<T> =
+        otherwiseReturn(exceptionType.java, value)

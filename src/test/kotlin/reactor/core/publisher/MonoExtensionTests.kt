@@ -86,6 +86,16 @@ class MonoExtensionTests {
                 .verifyComplete()
     }
 
+    @Test
+    fun otherwiseReturn() {
+        IOException()
+                .toMono<String>()
+                .otherwiseReturn(IOException::class, "foo")
+                .test()
+                .expectNext("foo")
+                .verifyComplete()
+    }
+
 }
 
 
