@@ -60,4 +60,14 @@ class FluxExtensionTests {
                 .verifyComplete()
     }
 
+    @Test
+    fun onErrorReturn() {
+        IOException()
+                .toFlux<String>()
+                .onErrorReturn(IOException::class, "foo")
+                .test()
+                .expectNext("foo")
+                .verifyComplete()
+    }
+
 }

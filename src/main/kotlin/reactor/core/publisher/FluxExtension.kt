@@ -45,3 +45,6 @@ inline fun <reified T : Any> Flux<*>.ofType() : Flux<*> = ofType(T::class.java)
 
 fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>, onError: (E) -> Publisher<T>) : Flux<T> =
         onErrorResumeWith(exceptionType.java, { onError(it) })
+
+fun <T : Any, E : Throwable> Flux<T>.onErrorReturn(exceptionType: KClass<E>, value: T) : Flux<T> =
+        onErrorReturn(exceptionType.java, value)
