@@ -48,3 +48,6 @@ fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>,
 
 fun <T : Any, E : Throwable> Flux<T>.onErrorReturn(exceptionType: KClass<E>, value: T) : Flux<T> =
         onErrorReturn(exceptionType.java, value)
+
+fun <T : Any, E : Throwable> Flux<T>.switchOnError(exceptionType: KClass<E>, publisher: Publisher<T>) : Flux<T> =
+        switchOnError(exceptionType.java, publisher)

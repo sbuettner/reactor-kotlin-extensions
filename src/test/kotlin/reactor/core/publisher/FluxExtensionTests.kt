@@ -70,4 +70,14 @@ class FluxExtensionTests {
                 .verifyComplete()
     }
 
+    @Test
+    fun switchOnError() {
+        IOException()
+                .toFlux<String>()
+                .switchOnError(IOException::class, "foo".toMono())
+                .test()
+                .expectNext("foo")
+                .verifyComplete()
+    }
+
 }
