@@ -23,3 +23,6 @@ fun <T, E : Throwable> Mono<T>.mapError(exceptionType: KClass<E>, mapper: (E) ->
 
 fun <T : Any> Mono<*>.ofType(kClass: KClass<T>) : Mono<*> = ofType(kClass.java)
 inline fun <reified T : Any> Mono<*>.ofType() : Mono<*> = ofType(T::class.java)
+
+fun <T : Any, E : Throwable> Mono<T>.otherwise(exceptionType: KClass<E>, fallback: (E) -> Mono<T>) : Mono<T> =
+        otherwise(exceptionType.java, { fallback(it) })

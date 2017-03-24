@@ -76,6 +76,16 @@ class MonoExtensionTests {
         "foo".toMono().ofType<Integer>().test().verifyComplete()
     }
 
+    @Test
+    fun otherwise() {
+        IOException()
+                .toMono<String>()
+                .otherwise(IOException::class, { "foo".toMono() })
+                .test()
+                .expectNext("foo")
+                .verifyComplete()
+    }
+
 }
 
 
