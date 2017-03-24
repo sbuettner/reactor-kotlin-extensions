@@ -22,7 +22,7 @@ class FluxExtensionTests {
     }
 
     @Test
-    fun `doOnError() with KClass parameter`() {
+    fun doOnError() {
         val fluxOnError: Flux<Any> = IllegalStateException().toFlux()
         var invoked = false
         fluxOnError.doOnError(IllegalStateException::class, {
@@ -32,29 +32,10 @@ class FluxExtensionTests {
     }
 
     @Test
-    fun `doOnError() with generic parameter`() {
-        val fluxOnError: Flux<Any> = IllegalStateException().toFlux()
-        var invoked = false
-        fluxOnError.doOnError<IllegalStateException>{
-            invoked = true
-        }.subscribe()
-        Assert.assertTrue(invoked)
-    }
-
-    @Test
-    fun `mapError() with KClass parameter`() {
+    fun mapError() {
         IOException()
                 .toFlux<Any>()
                 .mapError(IOException::class, ::IllegalStateException)
-                .test()
-                .verifyError<IllegalStateException>()
-    }
-
-    @Test
-    fun `mapError() with generic parameter`() {
-        IOException()
-                .toFlux<Any>()
-                .mapError<IOException>(::IllegalStateException)
                 .test()
                 .verifyError<IllegalStateException>()
     }
@@ -70,7 +51,7 @@ class FluxExtensionTests {
     }
 
     @Test
-    fun `onErrorResumeWith() with KClass parameter`() {
+    fun onErrorResumeWith() {
         IOException()
                 .toFlux<String>()
                 .onErrorResumeWith(IOException::class, { "foo".toMono() })

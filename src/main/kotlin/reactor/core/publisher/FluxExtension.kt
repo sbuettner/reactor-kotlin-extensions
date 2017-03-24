@@ -34,15 +34,11 @@ fun Flux<*>.test(n: Long) = StepVerifier.create(this, n)
 
 inline fun <reified T : Any> Flux<*>.cast(): Flux<T> = cast(T::class.java)
 
-fun <E : Throwable> Flux<*>.doOnError(exceptionType: KClass<E>, onError: (E) -> Unit) : Flux<*> =
+fun <T, E : Throwable> Flux<T>.doOnError(exceptionType: KClass<E>, onError: (E) -> Unit) : Flux<T> =
         doOnError(exceptionType.java, { onError(it) })
-inline fun <reified E : Throwable> Flux<*>.doOnError(crossinline onError: (E) -> Unit) : Flux<*> =
-        doOnError(E::class.java, { onError(it) })
 
-fun <E : Throwable> Flux<*>.mapError(exceptionType: KClass<E>, onError: (E) -> Throwable) : Flux<*> =
+fun <T, E : Throwable> Flux<T>.mapError(exceptionType: KClass<E>, onError: (E) -> Throwable) : Flux<T> =
         mapError(exceptionType.java, { onError(it) })
-inline fun <reified E : Throwable> Flux<*>.mapError(crossinline onError: (E) -> Throwable) : Flux<*> =
-        mapError(E::class.java, { onError(it) })
 
 fun <T : Any> Flux<*>.ofType(kClass: KClass<T>) : Flux<*> = ofType(kClass.java)
 inline fun <reified T : Any> Flux<*>.ofType() : Flux<*> = ofType(T::class.java)
