@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
 	val kotlinVersion = "1.1.1"
 	extra["kotlinVersion"] = kotlinVersion
@@ -20,6 +22,12 @@ version = "1.0.0.BUILD-SNAPSHOT"
 
 repositories {
 	mavenCentral()
+}
+
+tasks.withType<KotlinCompile> {
+	kotlinOptions {
+		jvmTarget = "1.8"
+	}
 }
 
 val kotlinVersion = extra["kotlinVersion"] as String
