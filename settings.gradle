@@ -1,2 +1,2 @@
-rootProject.name = 'reactor-kotlin'
+rootProject.name = 'reactor-kotlin-extensions'
 rootProject.buildFileName = 'build.gradle.kts'
