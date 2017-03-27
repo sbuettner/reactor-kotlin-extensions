@@ -96,6 +96,13 @@ class MonoExtensionsTests {
                 .verifyComplete()
     }
 
+    @Test
+    fun zip() {
+        listOf("Hello", "World", "Reactor").map { it.toMono() }.zip {
+            Triple(it[0], it[1], it[2])
+        }.test().expectNext(Triple("Hello", "World", "Reactor"))
+                .verifyComplete()
+    }
 }
 
 

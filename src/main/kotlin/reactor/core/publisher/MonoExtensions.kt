@@ -100,3 +100,12 @@ fun <T : Any, E : Throwable> Mono<T>.otherwise(exceptionType: KClass<E>, fallbac
  */
 fun <T : Any, E : Throwable> Mono<T>.otherwiseReturn(exceptionType: KClass<E>, value: T) : Mono<T> =
         otherwiseReturn(exceptionType.java, value)
+
+/**
+ * Extension for zipping an [Iterable] of [Mono]s.
+ *
+ * @author DoHyung Kim
+ */
+@Suppress("UNCHECKED_CAST")
+inline fun <T, V> Iterable<Mono<out T>>.zip(crossinline combinator: (List<T>) -> V): Mono<V> =
+        Mono.zip({ combinator(it.asList() as List<T>) }, this)
