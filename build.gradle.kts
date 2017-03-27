@@ -24,7 +24,6 @@ apply {
 }
 
 group = "io.projectreactor"
-version = "1.0.0.BUILD-SNAPSHOT"
 
 repositories {
 	mavenCentral()
