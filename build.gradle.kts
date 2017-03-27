@@ -1,3 +1,5 @@
+import org.gradle.jvm.tasks.Jar
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -6,16 +8,19 @@ buildscript {
 
 	repositories {
 		mavenCentral()
+		jcenter()
 	}
 
 	dependencies {
 		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+		classpath("org.jetbrains.dokka:dokka-gradle-plugin:0.9.13")
 	}
 }
 
 apply {
 	plugin("kotlin")
 	plugin("maven")
+	plugin("org.jetbrains.dokka")
 }
 
 group = "io.projectreactor"
@@ -42,3 +47,15 @@ dependencies {
 	testCompile("junit:junit:4.12")
 }
 
+val dokkaJar = task<Jar>("dokkaJar") {
+	dependsOn("dokka")
+	classifier = "javadoc"
+	from((tasks.getByName("dokka") as DokkaTask).outputDirectory)
+}
+val sourcesJar = task<Jar>("sourcesJar") {
+	classifier = "sources"
+	from(the<JavaPluginConvention>().sourceSets.getByName("main").allSource)
+}
+
+artifacts.add("archives", dokkaJar)
+artifacts.add("archives", sourcesJar)
