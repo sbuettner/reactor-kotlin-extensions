@@ -15,6 +15,7 @@ buildscript {
 
 apply {
 	plugin("kotlin")
+	plugin("maven")
 }
 
 group = "io.projectreactor"
