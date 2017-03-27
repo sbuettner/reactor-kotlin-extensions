@@ -8,7 +8,7 @@ import java.io.IOException
 import java.util.concurrent.Callable
 import java.util.concurrent.CompletableFuture
 
-class MonoExtensionTests {
+class MonoExtensionsTests {
 
     @Test
     fun anyToMono() {

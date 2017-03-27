@@ -5,7 +5,7 @@ import org.junit.Test
 import reactor.test.verifyError
 import java.io.IOException
 
-class FluxExtensionTests {
+class FluxExtensionsTests {
 
     @Test
     fun `Throwable to Flux`() {
