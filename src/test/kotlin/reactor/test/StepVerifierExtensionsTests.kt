@@ -4,7 +4,7 @@ import org.junit.Test
 import reactor.core.publisher.test
 import reactor.core.publisher.toMono
 
-class StepVerifierExtensionTests {
+class StepVerifierExtensionsTests {
 
     @Test
     fun `expectError() with KClass parameter`() {
