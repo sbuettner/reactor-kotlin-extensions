@@ -3,6 +3,18 @@
 This library exposes a set of Kotlin [extensions](https://kotlinlang.org/docs/reference/extensions.html)
 that allow a more idiomatic Kotlin usage of [Reactor](https://projectreactor.io/) APIs.
 
+## Examples
+
+| Java                                         | Kotlin with extensions               |
+| -------------------------------------------- | ------------------------------------ |
+| `Mono.just("foo")`                           | `"foo".toMono()`                     |
+| `Flux.fromIterable(list)`                    | `list.toFlux()`                      |
+| `Mono.error(new RuntimeException())`         | `RuntimeException().toMono()`        |
+| `Flux.error(new RuntimeException())`         | `RuntimeException().toFlux()`        |
+| `StepVerifier.create(flux).verifyComplete()` | `flux.test().verifyComplete()`       |
+| `flux.ofType(Foo.class)`                     | `flux.ofType<Foo>()` or `flux.ofType(Foo::class)` |
+| -------------------------------------------- | ------------------------------------ |
+
 ## Dependency
 
 ### Release
