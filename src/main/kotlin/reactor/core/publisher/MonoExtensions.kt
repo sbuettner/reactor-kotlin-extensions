@@ -60,7 +60,7 @@ inline fun <reified T : Any> Mono<*>.cast(): Mono<T> = cast(T::class.java)
  *
  * @author Sebastien Deleuze
  */
-fun <T, E : Throwable> Mono<T>.doOnError(exceptionType: KClass<E>, onError: (E) -> Unit) : Mono<T> =
+fun <T, E : Throwable> Mono<T>.doOnError(exceptionType: KClass<E>, onError: (E) -> Unit): Mono<T> =
         doOnError(exceptionType.java, { onError(it) })
 
 /**
@@ -68,7 +68,7 @@ fun <T, E : Throwable> Mono<T>.doOnError(exceptionType: KClass<E>, onError: (E) 
  *
  * @author Sebastien Deleuze
  */
-fun <T, E : Throwable> Mono<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable) : Mono<T> =
+fun <T, E : Throwable> Mono<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable): Mono<T> =
         mapError(exceptionType.java, { mapper(it) })
 
 /**
@@ -76,21 +76,21 @@ fun <T, E : Throwable> Mono<T>.mapError(exceptionType: KClass<E>, mapper: (E) ->
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any> Mono<*>.ofType(kClass: KClass<T>) : Mono<T> = ofType(kClass.java)
+fun <T : Any> Mono<*>.ofType(kClass: KClass<T>): Mono<T> = ofType(kClass.java)
 
 /**
  * Extension for [Mono.ofType] providing a `ofType<Foo>()` variant.
  *
  * @author Sebastien Deleuze
  */
-inline fun <reified T : Any> Mono<*>.ofType() : Mono<T> = ofType(T::class.java)
+inline fun <reified T : Any> Mono<*>.ofType(): Mono<T> = ofType(T::class.java)
 
 /**
  * Extension for [Mono.otherwise] providing a [KClass] based variant.
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any, E : Throwable> Mono<T>.otherwise(exceptionType: KClass<E>, fallback: (E) -> Mono<T>) : Mono<T> =
+fun <T : Any, E : Throwable> Mono<T>.otherwise(exceptionType: KClass<E>, fallback: (E) -> Mono<T>): Mono<T> =
         otherwise(exceptionType.java, { fallback(it) })
 
 /**
@@ -98,7 +98,7 @@ fun <T : Any, E : Throwable> Mono<T>.otherwise(exceptionType: KClass<E>, fallbac
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any, E : Throwable> Mono<T>.otherwiseReturn(exceptionType: KClass<E>, value: T) : Mono<T> =
+fun <T : Any, E : Throwable> Mono<T>.otherwiseReturn(exceptionType: KClass<E>, value: T): Mono<T> =
         otherwiseReturn(exceptionType.java, value)
 
 /**

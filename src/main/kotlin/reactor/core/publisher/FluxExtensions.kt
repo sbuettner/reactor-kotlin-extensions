@@ -129,7 +129,7 @@ inline fun <reified T : Any> Flux<*>.cast(): Flux<T> = cast(T::class.java)
  *
  * @author Sebastien Deleuze
  */
-fun <T, E : Throwable> Flux<T>.doOnError(exceptionType: KClass<E>, onError: (E) -> Unit) : Flux<T> =
+fun <T, E : Throwable> Flux<T>.doOnError(exceptionType: KClass<E>, onError: (E) -> Unit): Flux<T> =
         doOnError(exceptionType.java, { onError(it) })
 
 /**
@@ -137,7 +137,7 @@ fun <T, E : Throwable> Flux<T>.doOnError(exceptionType: KClass<E>, onError: (E) 
  *
  * @author Sebastien Deleuze
  */
-fun <T, E : Throwable> Flux<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable) : Flux<T> =
+fun <T, E : Throwable> Flux<T>.mapError(exceptionType: KClass<E>, mapper: (E) -> Throwable): Flux<T> =
         mapError(exceptionType.java, { mapper(it) })
 
 /**
@@ -145,21 +145,21 @@ fun <T, E : Throwable> Flux<T>.mapError(exceptionType: KClass<E>, mapper: (E) ->
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any> Flux<*>.ofType(kClass: KClass<T>) : Flux<T> = ofType(kClass.java)
+fun <T : Any> Flux<*>.ofType(kClass: KClass<T>): Flux<T> = ofType(kClass.java)
 
 /**
  * Extension for [Flux.ofType] providing a `ofType<Foo>()` variant.
  *
  * @author Sebastien Deleuze
  */
-inline fun <reified T : Any> Flux<*>.ofType() : Flux<T> = ofType(T::class.java)
+inline fun <reified T : Any> Flux<*>.ofType(): Flux<T> = ofType(T::class.java)
 
 /**
  * Extension for [Flux.onErrorResumeWith] providing a [KClass] based variant.
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>, fallback: (E) -> Publisher<T>) : Flux<T> =
+fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>, fallback: (E) -> Publisher<T>): Flux<T> =
         onErrorResumeWith(exceptionType.java, { fallback(it) })
 
 /**
@@ -167,7 +167,7 @@ fun <T : Any, E : Throwable> Flux<T>.onErrorResumeWith(exceptionType: KClass<E>,
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any, E : Throwable> Flux<T>.onErrorReturn(exceptionType: KClass<E>, value: T) : Flux<T> =
+fun <T : Any, E : Throwable> Flux<T>.onErrorReturn(exceptionType: KClass<E>, value: T): Flux<T> =
         onErrorReturn(exceptionType.java, value)
 
 /**
@@ -175,5 +175,5 @@ fun <T : Any, E : Throwable> Flux<T>.onErrorReturn(exceptionType: KClass<E>, val
  *
  * @author Sebastien Deleuze
  */
-fun <T : Any, E : Throwable> Flux<T>.switchOnError(exceptionType: KClass<E>, publisher: Publisher<T>) : Flux<T> =
+fun <T : Any, E : Throwable> Flux<T>.switchOnError(exceptionType: KClass<E>, publisher: Publisher<T>): Flux<T> =
         switchOnError(exceptionType.java, publisher)
