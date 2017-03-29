@@ -1,6 +1,8 @@
 package reactor.core.publisher
 
 import org.junit.Assert
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Test
 import reactor.test.verifyError
 import java.io.IOException
@@ -93,6 +95,8 @@ class FluxExtensionsTests {
     @Test
     fun orEmpty() {
         val nullFlux: Flux<String>? = null
-        nullFlux.orEmpty()
+        assertNull(nullFlux)
+        assertNotNull(nullFlux.orEmpty())
     }
+
 }

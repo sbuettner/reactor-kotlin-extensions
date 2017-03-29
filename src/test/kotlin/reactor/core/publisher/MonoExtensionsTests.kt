@@ -1,6 +1,8 @@
 package reactor.core.publisher
 
 import org.junit.Assert
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Test
 import reactor.test.expectError
 import reactor.test.verifyError
@@ -116,7 +118,8 @@ class MonoExtensionsTests {
     @Test
     fun orEmpty() {
         val nullMono: Mono<String>? = null
-        nullMono.orEmpty()
+        assertNull(nullMono)
+        assertNotNull(nullMono.orEmpty())
     }
 
 }
