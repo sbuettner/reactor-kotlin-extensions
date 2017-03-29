@@ -177,3 +177,10 @@ fun <T : Any, E : Throwable> Flux<T>.onErrorReturn(exceptionType: KClass<E>, val
  */
 fun <T : Any, E : Throwable> Flux<T>.switchOnError(exceptionType: KClass<E>, publisher: Publisher<T>): Flux<T> =
         switchOnError(exceptionType.java, publisher)
+
+/**
+ * Extension for merging a [Flux] with a [Publisher].
+ *
+ * @author Simon Buettner
+ */
+operator fun <T> Flux<T>.plus(p: Publisher<T>): Flux<T> = this.mergeWith(p)

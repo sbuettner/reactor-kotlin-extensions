@@ -103,6 +103,16 @@ class MonoExtensionsTests {
         }.test().expectNext(Triple("Hello", "World", "Reactor"))
                 .verifyComplete()
     }
+
+    @Test
+    fun plus() {
+        ("Hello".toMono() + "World".toMono())
+            .test()
+            .expectNext("Hello")
+            .expectNext("World")
+            .verifyComplete()
+    }
+
 }
 
 

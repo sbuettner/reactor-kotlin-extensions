@@ -1,5 +1,6 @@
 package reactor.core.publisher
 
+import org.reactivestreams.Publisher
 import reactor.test.StepVerifier
 import java.util.concurrent.Callable
 import java.util.concurrent.CompletableFuture
@@ -109,3 +110,10 @@ fun <T : Any, E : Throwable> Mono<T>.otherwiseReturn(exceptionType: KClass<E>, v
 @Suppress("UNCHECKED_CAST")
 inline fun <T, V> Iterable<Mono<out T>>.zip(crossinline combinator: (List<T>) -> V): Mono<V> =
         Mono.zip({ combinator(it.asList() as List<T>) }, this)
+
+/**
+ * Extension for merging a [Mono] with a [Publisher].
+ *
+ * @author Simon Buettner
+ */
+operator fun <T> Mono<T>.plus(p: Publisher<T>): Flux<T> = this.mergeWith(p)

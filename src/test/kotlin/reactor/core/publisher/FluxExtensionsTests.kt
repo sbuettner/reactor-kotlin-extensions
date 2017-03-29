@@ -80,4 +80,14 @@ class FluxExtensionsTests {
                 .verifyComplete()
     }
 
+    @Test
+    fun plus() {
+        (arrayOf("Hello", "World").toFlux() + arrayOf("Reactor").toFlux())
+            .test()
+            .expectNext("Hello")
+            .expectNext("World")
+            .expectNext("Reactor")
+            .verifyComplete()
+    }
+
 }
