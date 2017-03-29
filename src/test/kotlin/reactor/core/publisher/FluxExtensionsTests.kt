@@ -90,4 +90,9 @@ class FluxExtensionsTests {
             .verifyComplete()
     }
 
+    @Test
+    fun orEmpty() {
+        val nullFlux: Flux<String>? = null
+        nullFlux.orEmpty()
+    }
 }

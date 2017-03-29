@@ -117,3 +117,10 @@ inline fun <T, V> Iterable<Mono<out T>>.zip(crossinline combinator: (List<T>) ->
  * @author Simon Buettner
  */
 operator fun <T> Mono<T>.plus(p: Publisher<T>): Flux<T> = this.mergeWith(p)
+
+/**
+ * Extension for creating an empty [Mono] from a nullable one.
+ *
+ * @author Simon Buettner
+ */
+fun <T> Mono<T>?.orEmpty(): Mono<T> = this?: Mono.empty()

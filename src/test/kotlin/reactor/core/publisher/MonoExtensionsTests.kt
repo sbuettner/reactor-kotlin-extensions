@@ -113,6 +113,12 @@ class MonoExtensionsTests {
             .verifyComplete()
     }
 
+    @Test
+    fun orEmpty() {
+        val nullMono: Mono<String>? = null
+        nullMono.orEmpty()
+    }
+
 }
 
 

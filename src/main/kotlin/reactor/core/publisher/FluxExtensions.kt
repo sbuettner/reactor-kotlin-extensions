@@ -184,3 +184,10 @@ fun <T : Any, E : Throwable> Flux<T>.switchOnError(exceptionType: KClass<E>, pub
  * @author Simon Buettner
  */
 operator fun <T> Flux<T>.plus(p: Publisher<T>): Flux<T> = this.mergeWith(p)
+
+/**
+ * Extension for creating an empty [Flux] from a nullable one.
+ *
+ * @author Simon Buettner
+ */
+fun <T> Flux<T>?.orEmpty(): Flux<T> = this?: Flux.empty()
